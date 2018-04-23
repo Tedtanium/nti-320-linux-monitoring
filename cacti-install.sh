@@ -1,3 +1,4 @@
+#!/bin/bash
 yum -y install cacti              
 yum install mariadb-server
                                    
@@ -31,22 +32,19 @@ rpm -ql cacti|grep cacti.sql
 mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti -p  
 
   
-vim /etc/cacti/db.php            # Set database username and password in $database_username = ''; and $database_password = '';
+#vim /etc/cacti/db.php
+sed -i 's/cactiuser/tjensen/g' /etc/cacti/db.php
+sed -i '/cactipass/badpassword/g' /etc/cacti/db.php
+
+#vim /etc/httpd/conf.d/cacti.conf  
+sed -i 's/Allow from localhost/Require all granted/g' /etc/httpd/conf.d/cacti.conf
 
 
-vim /etc/httpd/conf.d/cacti.conf     # Top open up access from your subnet, external host or anywere.  Note, anywere isn't recommended
-                              
-
-systemctl restart httpd.service
 sed -i 's/#//g' /etc/cron.d/cacti
 setenforce 0
 
+sed -i 's`; http://php.net/date.timezone`http://php.net/date.timezone`g' /etc/php.ini
+sed -i 's`;date.timezone =`date.timezone = America/Regina`g' /etc/conf.d /etc/php.ini
 
-
-
-End scripty part.  Further bug fixes, you'll need to update your php.ini like so:
-[root@cacti-c etc]# diff php.ini php.ini.orig 
-878c878
-< date.timezone = America/Regina
----
-> ;date.timezone =
+systemctl restart httpd.service
+systemctl restart cacti
