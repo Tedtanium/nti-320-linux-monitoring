@@ -1,0 +1,20 @@
+To create devices:
+1. On web UI, go to Management -> Devices -> Add
+2. Give the form a description and hostname (or IP address).
+3. Select a template.
+4. Configure SNMP, if applicable.
+5. Add a graph template for the device, if applicable.
+6. Hit save.
+
+To add graphs:
+1. Go to the graphs tab, and hit new graphs under Create.
+2. Check one of the existing graph templates, or create one using the drop-down menu.
+3. Graphs trees, hierarchical ways of viewing graphs, can be configured in Management -> Graph Trees.
+4. 
+
+To monitor SNMP:
+1. In device creation, SNMP options can be configured 
+2. Only external or spine SNMP should be used, unless Cacti 1 is present.
+3. The command snmpwalk can be used in bash to troubleshoot issues with SNMP, if any are advertised.
+4. SNMP can be used as a data query, and probably also in graphs.
+
