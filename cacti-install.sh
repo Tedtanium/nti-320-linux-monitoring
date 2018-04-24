@@ -43,7 +43,6 @@ sed -i 's/Allow from localhost/Require all granted/g' /etc/httpd/conf.d/cacti.co
 sed -i 's/#//g' /etc/cron.d/cacti
 setenforce 0
 
-sed -i 's`; http://php.net/date.timezone`http://php.net/date.timezone`g' /etc/php.ini
 sed -i 's`;date.timezone =`date.timezone = America/Regina`g' /etc/conf.d /etc/php.ini
 
 systemctl restart httpd.service
