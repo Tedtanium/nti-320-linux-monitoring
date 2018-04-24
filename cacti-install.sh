@@ -33,8 +33,8 @@ mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti -p
 
   
 #vim /etc/cacti/db.php
-sed -i 's/cactiuser/tjensen/g' /etc/cacti/db.php
-sed -i '/cactipass/badpassword/g' /etc/cacti/db.php
+sed -i 's/username = '\''cactiuser'\''/username = '\''tjensen'\''/g' /etc/cacti/db.php
+sed -i 's/password = '\''cactiuser'\''/password = '\''badpassword'\''/g' /etc/cacti/db.php
 
 #vim /etc/httpd/conf.d/cacti.conf  
 sed -i 's/Allow from localhost/Require all granted/g' /etc/httpd/conf.d/cacti.conf
@@ -46,4 +46,3 @@ setenforce 0
 sed -i 's`;date.timezone =`date.timezone = America/Regina`g' /etc/conf.d /etc/php.ini
 
 systemctl restart httpd.service
-systemctl restart cacti
