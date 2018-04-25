@@ -1,4 +1,5 @@
 #!/bin/bash
+
 yum -y install cacti              
 yum install mariadb-server
                                    
@@ -14,8 +15,9 @@ systemctl start mariadb
 systemctl start httpd
 systemctl start snmpd
 
-mysqladmin -u root password badpassword
-
+mysqladmin -u root password 
+badpassword
+badpassword
 
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql 
 
