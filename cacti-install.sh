@@ -32,7 +32,6 @@ GRANT SELECT ON mysql.time_zone_name TO cacti@localhost;
 flush privileges;" > stuff.sql
 
 
-mysql -u root  -p < stuff.sql   
 rpm -ql cacti|grep cacti.sql     
 
 mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti -p  
