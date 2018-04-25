@@ -39,17 +39,19 @@ mysql -u root  -p < stuff.sql
 
   
 #vim /etc/cacti/db.php
-sed -i 's/username = '\''cactiuser'\''/username = '\''tjensen'\''/g' /etc/cacti/db.php
 sed -i 's/password = '\''cactiuser'\''/password = '\''badpassword'\''/g' /etc/cacti/db.php
 
 #vim /etc/httpd/conf.d/cacti.conf  
-sed -i 's/Allow from localhost/Require all granted/g' /etc/httpd/conf.d/cacti.conf
+sed -i 's/Require from localhost/Require all granted/g' /etc/httpd/conf.d/cacti.conf
+sed -i 's/Deny from all//#/Deny from all/g' /etc/httpd/conf.d/cacti.conf
+sed -i 's/Require all granted/Allow from all/g' /etc/httpd/conf.d/cacti.conf
 
 
 sed -i 's/#//g' /etc/cron.d/cacti
 
 sed -i 's`;date.timezone =`date.timezone = America/Regina`g' /etc/conf.d /etc/php.ini
 
-systemctl restart httpd.service
+systemctl stop httpd
+systemctl start httpd
 
 setenforce 0
