@@ -1,7 +1,7 @@
 #!/bin/bash
 
 yum -y install cacti              
-yum install mariadb-server
+yum install mariadb-server -y
                                    
 yum install php-process php-gd php mod_php -y
                                    
@@ -15,11 +15,10 @@ systemctl start mariadb
 systemctl start httpd
 systemctl start snmpd
 
-mysqladmin -u root password 
-badpassword
-badpassword
+mysqladmin -u root password badpassword
 
-mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql 
+
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pbadpassword mysql 
 
 echo "create database cacti;
 
@@ -34,8 +33,9 @@ flush privileges;" > stuff.sql
 
 rpm -ql cacti|grep cacti.sql     
 
-mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti -p  
-mysql -u root  -p < stuff.sql
+mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti -pbadpassword
+
+mysql -u root  -pbadpassword < stuff.sql
 
   
 #vim /etc/cacti/db.php
@@ -49,7 +49,7 @@ sed -i 's/Require all granted/Allow from all/g' /etc/httpd/conf.d/cacti.conf
 
 sed -i 's/#//g' /etc/cron.d/cacti
 
-sed -i 's`;date.timezone =`date.timezone = America/Regina`g' /etc/conf.d /etc/php.ini
+sed -i 's`;date.timezone =`date.timezone = America/Regina`g' /etc/php.ini
 
 systemctl stop httpd
 systemctl start httpd
