@@ -30,6 +30,7 @@ mysql -u root  -p < stuff.sql
 rpm -ql cacti|grep cacti.sql     
 
 mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti -p  
+mysql -u root  -p < stuff.sql
 
   
 #vim /etc/cacti/db.php
@@ -41,8 +42,9 @@ sed -i 's/Allow from localhost/Require all granted/g' /etc/httpd/conf.d/cacti.co
 
 
 sed -i 's/#//g' /etc/cron.d/cacti
-setenforce 0
 
 sed -i 's`;date.timezone =`date.timezone = America/Regina`g' /etc/conf.d /etc/php.ini
 
 systemctl restart httpd.service
+
+setenforce 0
