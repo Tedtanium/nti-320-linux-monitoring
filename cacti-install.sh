@@ -22,10 +22,13 @@ badpassword
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql 
 
 echo "create database cacti;
+
 GRANT ALL ON cacti.* TO cacti@localhost IDENTIFIED BY 'badpassword'; 
 
 FLUSH privileges;
-GRANT SELECT ON mysql.time_zone_name TO cacti@localhost;       
+
+GRANT SELECT ON mysql.time_zone_name TO cacti@localhost;  
+
 flush privileges;" > stuff.sql
 
 
