@@ -4,3 +4,4 @@ systemctl enable snmpd
 systemctl start snmpd
 #To test: [snmpwalk -v 1 -c public -O e 127.0.0.1]
 #To access: [<ip>/cacti] username: [admin] password: [P@ssw0rd1]
+#Machines: cacti-new (server), nagios-test (client).
