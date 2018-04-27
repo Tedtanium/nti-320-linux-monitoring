@@ -55,3 +55,5 @@ systemctl stop httpd
 systemctl start httpd
 
 setenforce 0
+
+#After install: If things aren't writable, use [chmod 775 /usr/share/cacti/resource/s*].
