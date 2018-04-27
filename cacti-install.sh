@@ -56,4 +56,5 @@ systemctl start httpd
 
 setenforce 0
 
-#After install: If things aren't writable, use [chmod 775 /usr/share/cacti/resource/s*].
+#After install: If things aren't writable, use [chmod 775 /usr/share/cacti/resource/s*] and set SELinux to permissive, with 
+[vim /etc/selinux/config] or [setenforce 0].
