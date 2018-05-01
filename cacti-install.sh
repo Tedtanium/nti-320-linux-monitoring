@@ -29,9 +29,7 @@ FLUSH privileges;
 GRANT SELECT ON mysql.time_zone_name TO cacti@localhost;  
 
 flush privileges;" > stuff.sql
-
-
-rpm -ql cacti|grep cacti.sql     
+    
 
 mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti -pbadpassword
 
@@ -51,8 +49,7 @@ sed -i 's/#//g' /etc/cron.d/cacti
 
 sed -i 's`;date.timezone =`date.timezone = America/Regina`g' /etc/php.ini
 
-systemctl stop httpd
-systemctl start httpd
+systemctl restart httpd.service
 
 setenforce 0
 
