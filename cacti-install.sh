@@ -30,10 +30,11 @@ GRANT SELECT ON mysql.time_zone_name TO cacti@localhost;
 
 flush privileges;" > stuff.sql
     
-
-mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti -pbadpassword
-
 mysql -u root  -pbadpassword < stuff.sql
+
+mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti.sql -pbadpassword
+
+
 
   
 #vim /etc/cacti/db.php
