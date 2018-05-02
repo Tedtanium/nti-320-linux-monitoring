@@ -15,24 +15,26 @@ systemctl start mariadb
 systemctl start httpd
 systemctl start snmpd
 
+chmod 775 /usr/share/cacti/resource/s*
+
 mysqladmin -u root password badpassword
 
 
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pbadpassword mysql 
 
-echo "create database cacti;
-
+echo -e "create database cacti;
+\n
 GRANT ALL ON cacti.* TO cacti@localhost IDENTIFIED BY 'badpassword'; 
-
+\n
 FLUSH privileges;
-
+\n
 GRANT SELECT ON mysql.time_zone_name TO cacti@localhost;  
-
+\n
 flush privileges;" > stuff.sql
     
 mysql -u root  -pbadpassword < stuff.sql
 
-mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u cacti.sql -pbadpassword
+mysql cacti < /usr/share/doc/cacti-1.1.37/cacti.sql -u root -pbadpassword
 
 
 
