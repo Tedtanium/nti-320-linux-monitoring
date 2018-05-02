@@ -44,8 +44,8 @@ sed -i 's/username = '\''cactiuser'\''/username = '\''cacti'\''/g' /etc/cacti/db
 sed -i 's/password = '\''cactiuser'\''/password = '\''badpassword'\''/g' /etc/cacti/db.php
 
 #vim /etc/httpd/conf.d/cacti.conf  
-sed -i 's/Require host localhost/Require all granted/g' /etc/httpd/conf.d/cacti.conf
 sed -i 's/Require all granted/Allow from all/g' /etc/httpd/conf.d/cacti.conf
+sed -i 's/Require host localhost/Require all granted/g' /etc/httpd/conf.d/cacti.conf
 
 
 sed -i 's/#//g' /etc/cron.d/cacti
