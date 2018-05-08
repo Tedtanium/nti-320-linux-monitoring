@@ -11,14 +11,14 @@ yum install -y wget
 #Pulls down the tarball for the package. Place it in the SOURCES directory. When automating, use wget -P.
 wget https://github.com/nic-instruction/NTI-320/blob/master/rpm-info/hello_world_from_source/helloworld-0.1.tar.gz?raw=true
 
-#Pull down or make a shell file. 
+#Pull down or make a shell file. Put it in SOURCES.
 wget https://raw.githubusercontent.com/nic-instruction/NTI-320/master/rpm-info/hello_world_from_source/helloworld.sh
 
 #Pull down hello.spec. Put it in the SPECS directory.
 
 wget https://raw.githubusercontent.com/nic-instruction/NTI-320/master/rpm-info/hello_world_from_source/hello.spec
 
-#Creates an RPM file out of the specs.
+#Builds an RPM file out of the specs This is put in the RPMS directory.
 
 rpmbuild -v -bb --clean SPECS/hello.specs
 
