@@ -1,5 +1,5 @@
 #!/bin/bash
-
+if [ -e /etc/nagios/objects/commands.cfg ]; then exit 0; fi
 yum -y install cacti              
 yum install mariadb-server -y
                                    
@@ -19,6 +19,14 @@ chmod 775 /usr/share/cacti/resource/s*
 
 mysqladmin -u root password badpassword
 
+echo "[nti-320]
+name=Extra Packages for Centos from NTI-320 7 - $basearch
+#baseurl=http://download.fedoraproject.org/pub/epel/7/$basearch <- example epel repo
+# Note, this is putting repodata at packages instead of 7 and our path is a hack around that.
+baseurl=http://10.142.0.7/centos/7/extras/x86_64/Packages/
+enabled=1
+gpgcheck=0
+" >> /etc/yum.repos.d/NTI-320.repo 
 
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pbadpassword mysql 
 
