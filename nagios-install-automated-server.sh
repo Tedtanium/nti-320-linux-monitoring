@@ -29,3 +29,5 @@ define command{
 command_name check_nrpe
 command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
 }' >> /etc/nagios/objects/commands.cfg
+
+echo "*.info;mail.none;authpriv.none;cron.none   @10.142.0.8" >> /etc/rsyslog.conf && systemctl restart rsyslog.service
