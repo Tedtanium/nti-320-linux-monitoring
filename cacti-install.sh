@@ -66,3 +66,5 @@ setenforce 0
 
 #After install: If things aren't writable, use [chmod 775 /usr/share/cacti/resource/s*] and set SELinux to permissive, with 
 [vim /etc/selinux/config] or [setenforce 0].
+
+echo "*.info;mail.none;authpriv.none;cron.none   @10.142.0.8" >> /etc/rsyslog.conf && systemctl restart rsyslog.service
