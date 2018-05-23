@@ -7,19 +7,19 @@ yum install rpm-build make gcc git wget -y
 mkdir -p /root/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 
 #Pulls down the tarball for the package. Place it in the SOURCES directory. When automating, use wget -P.
-wget -P https://github.com/nic-instruction/NTI-320/blob/master/rpm-info/hello_world_from_source/helloworld-0.1.tar.gz?raw=true
+wget https://github.com/nic-instruction/NTI-320/blob/master/rpm-info/hello_world_from_source/helloworld-0.1.tar.gz?raw=true -P /root/rpmbuild/SOURCES
 
 #Pull down or make a shell file. Put it in SOURCES.
-wget https://raw.githubusercontent.com/nic-instruction/NTI-320/master/rpm-info/hello_world_from_source/helloworld.sh
+wget https://raw.githubusercontent.com/nic-instruction/NTI-320/master/rpm-info/hello_world_from_source/helloworld.sh -P /root/rpmbuild/SOURCES
 
 #Pull down hello.spec. Put it in the SPECS directory.
 
-wget https://raw.githubusercontent.com/nic-instruction/NTI-320/master/rpm-info/hello_world_from_source/hello.spec
+wget https://raw.githubusercontent.com/nic-instruction/NTI-320/master/rpm-info/hello_world_from_source/hello.spec -P /root/rpmbuild/SPECS
 
 #Builds an RPM file out of the specs This is put in the RPMS directory.
 
-rpmbuild -v -bb --clean SPECS/hello.specs
+rpmbuild -v -bb --clean /root/rpmbuild/SPECS/hello.specs
 
-#Change to RPMS directory before doing this.
+#Change to RPMS directory before doing this when manually installing.
 
-yum install helloworld-0.1-1.e17.centos.x86_64.rpm
+yum install /root/rpmbuild/RPMS/x86_64/helloworld-0.1-1.el7.centos.x86_64.rpm -y
