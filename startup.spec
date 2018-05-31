@@ -28,7 +28,7 @@ mkdir -p %{buildroot}/etc/nrpe.d/
 
 install -m 0755 startup.sh %{buildroot}/usr/lib64/nagios/plugins/
 
-install -m 0744 nti320.cfg %{buildroot}/etc/nrpe.d/
+#install -m 0744 nti320.cfg %{buildroot}/etc/nrpe.d/
 
 %clean
 
@@ -38,7 +38,7 @@ install -m 0744 nti320.cfg %{buildroot}/etc/nrpe.d/
 
 
 %config
-/etc/nrpe.d/nti320.cfg
+#/etc/nrpe.d/nti320.cfg
 
 %doc			
 
@@ -53,5 +53,5 @@ sed -i 's,/dev/hda1,/dev/sda1,'  /etc/nagios/nrpe.cfg
 
 %postun
 rm /thisworked2
-rm /etc/nrpe.d/nti320.cfg
+#rm /etc/nrpe.d/nti320.cfg
 %changelog				# changes you (and others) have made and why
