@@ -26,7 +26,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/lib64/nagios/plugins/
 mkdir -p %{buildroot}/etc/nrpe.d/
 
-install -m 0755 nti-sanity.sh %{buildroot}/usr/lib64/nagios/plugins/
+install -m 0755 startup.sh %{buildroot}/usr/lib64/nagios/plugins/
 
 install -m 0744 nti320.cfg %{buildroot}/etc/nrpe.d/
 
@@ -34,7 +34,7 @@ install -m 0744 nti320.cfg %{buildroot}/etc/nrpe.d/
 
 %files					
 %defattr(-,root,root)	
-/usr/lib64/nagios/plugins/nti-sanity.sh
+/usr/lib64/nagios/plugins/startup.sh
 
 
 %config
