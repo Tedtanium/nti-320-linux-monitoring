@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#This needs to be run as the Gcloud user.
+
+############# Gets list of active machines. ####################
+gcloud compute instances list | grep RUNNING | awk '{print $1}' > active-hosts
+
+############# FOR LOOP #########################################
+for line in $(cat active-hosts);
+
+do
+#Stores instance name as variable $INSTANCENAME.
+  INSTANCENAME=$line
+
+#Copies file to the instance via SSH. 
+  gcloud compute scp /home/tjense04/example.txt $INSTANCENAME:/tmp/
+  
+########## IF STATEMENT - Deals with SSH key creation. #######  
+  if [ ! -e /home/tjense04/.ssh/google_compute_engine.pub ]
+#Weirdly necessary to create the SSH key. Line breaks are intentional.
+    
+    
+    y
+  fi
+######## END OF IF STATEMENT ################################
+
+
+done
+######## END OF FOR LOOP ####################################
