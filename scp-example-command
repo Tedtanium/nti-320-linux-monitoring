@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Provides the ability to copy a file out to all running instances on the network.
+
 #This needs to be run as the Gcloud user.
 
 ############# Gets list of active machines. ####################
