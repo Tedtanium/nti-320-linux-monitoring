@@ -28,6 +28,13 @@ command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
 
 echo "*.info;mail.none;authpriv.none;cron.none   @RSYSLOGIP" >> /etc/rsyslog.conf && systemctl restart rsyslog.service
 
+#Disables authentication.
+sed -i 's/use_authentication=1/use_authentication=0/g' /etc/nagios/cgi.cfg
+sed -i 's/AuthName/#Authname/g' /etc/httpd/conf.d/nagios.conf
+sed -i 's/AuthType/#AuthType/g' /etc/httpd/conf.d/nagios.conf
+sed -i 's/AuthUserFile/#AuthUserFile/g' /etc/httpd/conf.d/nagios.conf
+sed -i 's/Require valid/#Require valid/g' /etc/httpd/conf.d/nagios.conf
+
 systemctl restart nagios
 
 #To validate configs: Run /usr/sbin/nagios -v /etc/nagios/nagios.cfg.
