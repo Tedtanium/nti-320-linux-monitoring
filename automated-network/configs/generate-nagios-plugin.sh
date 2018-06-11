@@ -7,8 +7,8 @@ if [[  $# -eq 0 ]]; then                    # If no arguments are given to the s
    exit 0;
 fi
 
-host="$HOSTNAME"
-ip="$IP"
+host="$1"
+ip="$2"
 
 echo "
 # Host Definition
