@@ -29,3 +29,5 @@ do
 
 done
 ######## END OF FOR LOOP ####################################
+
+#Look towards the SSH to all (https://github.com/Tedtanium/nti-320-linux-monitoring/blob/master/ssh-to-all-example) for better automation syntax should this fail, future me.
