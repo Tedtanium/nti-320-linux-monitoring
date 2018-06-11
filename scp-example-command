@@ -19,9 +19,9 @@ do
   
 ########## IF STATEMENT - Deals with SSH key creation. #######  
   if [ ! -e /home/tjense04/.ssh/google_compute_engine.pub ]
-#Weirdly necessary to create the SSH key. Line breaks are intentional.
-    
-    
+#Weirdly necessary to create the SSH key.
+    badpassword
+    badpassword
     y
   fi
 ######## END OF IF STATEMENT ################################
