@@ -1,9 +1,9 @@
 #!/bin/bash
 if [ -e /etc/nagios/objects/commands.cfg ]; then exit 0; fi
 
-yum install nagios nrpe nagios-plugins-all nagios-plugins-nrpe nagios-selinux httpd -y
+yum install nagios nrpe nagios-plugins-all nagios-plugins-nrpe nagios-selinux httpd wget -y
 
-
+wget https://raw.githubusercontent.com/Tedtanium/nti-320-linux-monitoring/master/automated-network/configs/generate-nagios-client.sh
 
 systemctl enable nagios
 systemctl start nagios
