@@ -29,3 +29,5 @@ command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
 echo "*.info;mail.none;authpriv.none;cron.none   @RSYSLOGIP" >> /etc/rsyslog.conf && systemctl restart rsyslog.service
 
 systemctl restart nagios
+
+#To validate configs: Run /usr/sbin/nagios -v /etc/nagios/nagios.cfg.
