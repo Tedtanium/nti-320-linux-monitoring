@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#Provides the ability to copy a file out to all running instances on the network.
+
+#This needs to be run as the Gcloud user.
+su - tjense04
+
+
+############# Gets list of active machines. ####################
+gcloud compute instances list | grep RUNNING | awk '{print $1}' > /home/tjense04/active-hosts
+
+####### Removes the server from its own list of servers. #########
+
+sed -i '/master/d' /home/tjense04/active-hosts
+
+############# FOR LOOP #########################################
+for line in $(cat active-hosts);
+
+do
+#Stores instance name as variable $INSTANCENAME.
+  INSTANCENAME=$line
+
+#SSHes in and echoes... A thing. 
+  gcloud compute ssh $INSTANCENAME --zone "us-east1-b" --command "echo 'Oh god it burns help it's eating my brain!' >> /home/tjense04/lastwords.txt"
+  gcloud compute ssh $INSTANCENAME --zone "us-east1-b" --command "echo 'And nobody heard of squid basketball ever again.' >> /home/tjense04/lastwords.txt"
+  
+done
+######## END OF FOR LOOP ####################################
