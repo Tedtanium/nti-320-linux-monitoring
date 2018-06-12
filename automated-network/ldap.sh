@@ -1,7 +1,6 @@
 #!/bin/bash
 yum install wget -y
-wget https://raw.githubusercontent.com/Tedtanium/nti-310-linux-enterprise-applications/master/automated-network/dependent-files/config.php
-
+wget https://raw.githubusercontent.com/Tedtanium/nti-320-linux-monitoring/master/automated-network/configs/config.php
 yum install -y openldap-servers openldap-clients
 
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
