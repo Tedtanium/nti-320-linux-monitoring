@@ -1,5 +1,5 @@
-build-server
 nagios
+build-server
 cacti
 rsyslog
 ldap
