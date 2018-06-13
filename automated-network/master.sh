@@ -79,7 +79,7 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
   if [ $HOSTNAME != 'nagios' ]; then
     IP=$(getent hosts $HOSTNAME.c.nti-320-200300.internal | awk '{ print $1 }')
     #Runs the Nagios client creation script on the Nagios server, passing hostname and IP variables as arguments.
-    gcloud compute ssh --zone us-east1-b nagios --command "sudo bash /generate-nagios-client.sh $HOSTNAME $IP"
+    su - tjense04 -c 'gcloud compute ssh --zone us-east1-b nagios --quiet --command "sudo bash /generate-nagios-client.sh $HOSTNAME $IP"'
   fi
   
 done
