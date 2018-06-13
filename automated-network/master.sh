@@ -30,7 +30,7 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
   
   if [ $HOSTNAME = 'nagios' ]; then
     gcloud compute instances create nagios	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/nagios.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
-    sleep 2m
+    sleep 4m
   fi
   
   if [ $HOSTNAME = 'ldap' ]; then
