@@ -9,6 +9,8 @@ systemctl enable nagios
 systemctl start nagios
 systemctl enable nrpe
 systemctl start nrpe
+systemctl start httpd
+systemctl restart httpd
 
 
 echo "[nti-320]
