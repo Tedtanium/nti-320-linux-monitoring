@@ -4,8 +4,7 @@ cacti
 rsyslog
 ldap
 nfs
-client-a
-client-b
+client
 postgres
 django
 load-balancer
