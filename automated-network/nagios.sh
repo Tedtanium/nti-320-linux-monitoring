@@ -54,7 +54,7 @@ gpgcheck=0
 " >> /etc/yum.repos.d/NTI-320.repo   
 
 # Sleeps for a bit for the rest of the network to finish spinning up (and for clients to propogate).
-sleep 6m
+sleep 3m
 
 systemctl restart nagios
 systemctl restart httpd
