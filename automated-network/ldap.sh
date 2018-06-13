@@ -51,9 +51,9 @@ olcRootDN: cn=ldapadm,dc=nti310,dc=local
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootPW
-olcRootPW: $newhash" > db.ldif
+olcRootPW: $newhash" > /db.ldif
 
-ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
+ldapmodify -Y EXTERNAL  -H ldapi:/// -f /db.ldif
 
 #Auth restriction.
 
@@ -62,7 +62,7 @@ changetype: modify
 replace: olcAccess
 olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="cn=ldapadm,dc=nti310,dc=local" read by * none' > monitor.ldif
 
-ldapmodify -Y EXTERNAL  -H ldapi:/// -f monitor.ldif
+ldapmodify -Y EXTERNAL  -H ldapi:/// -f /monitor.ldif
 
 #Certgen.
 
@@ -78,9 +78,9 @@ olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem
 dn: cn=config
 changetype: modify
 replace: olcTLSCertificateKeyFile
-olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > certs.ldif
+olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > /certs.ldif
 
-ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
+ldapmodify -Y EXTERNAL  -H ldapi:/// -f /certs.ldif
 
 
 
@@ -106,11 +106,11 @@ ou: People
 \n
 dn: ou=Group,dc=nti310,dc=local
 objectClass: organizationalUnit
-ou: Group" > base.ldif
+ou: Group" > /base.ldif
 
 setenforce 0
 
-ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_admin_pass
+ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f /base.ldif -y /root/ldap_admin_pass
 
 systemctl restart httpd
 
