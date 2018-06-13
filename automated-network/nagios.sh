@@ -39,6 +39,7 @@ sed -i 's/AuthUserFile/#AuthUserFile/g' /etc/httpd/conf.d/nagios.conf
 sed -i 's/Require valid/#Require valid/g' /etc/httpd/conf.d/nagios.conf
 
 systemctl restart nagios
+systemctl restart httpd
 
 #To validate configs: Run /usr/sbin/nagios -v /etc/nagios/nagios.cfg.
 
