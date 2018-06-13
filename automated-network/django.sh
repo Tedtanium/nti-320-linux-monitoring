@@ -36,7 +36,7 @@ wget https://raw.githubusercontent.com/Tedtanium/nti-310-linux-enterprise-applic
 
 postgresip=$(getent hosts postgres.c.nti-310-200201.internal | awk '{ print $1 }')
 
-sed -i "s|'HOST': '1.2.3.4'|'HOST': '$postgresip'|g" /opt/myproject/myproject/settings.py
+sed -i "s|'HOST': '1.2.3.4'|'HOST': 'POSTGRESIP'|g" /opt/myproject/myproject/settings.py
 sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS =  \[\'"*"\'\]/g" /opt/myproject/myproject/settings.py
 
 
