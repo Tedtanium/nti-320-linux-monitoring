@@ -17,7 +17,7 @@ git clone https://github.com/Tedtanium/nti-320-linux-monitoring.git
 
 ####### FIREWALL RULE CREATION #######
 #gcloud compute firewall-rules create djangoisonfiresomebodycall911 --allow tcp:8000
-# ^ Needs to be run once, will error if it already exists.
+# ^ Needs to be run once, will error and abort script if it already exists.
 
 
 ########## For loop. #########################
@@ -30,7 +30,7 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
   
   if [ $HOSTNAME = 'nagios' ]; then
     gcloud compute instances create nagios	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/nagios.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
-    sleep 4m
+    sleep 120s
   fi
   
   if [ $HOSTNAME = 'ldap' ]; then
@@ -76,7 +76,7 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
   if [ $HOSTNAME != 'nagios' ]; then
     IP=$(getent hosts $HOSTNAME.c.nti-320-200300.internal | awk '{ print $1 }')
     #Runs the Nagios client creation script on the Nagios server, passing hostname and IP variables as arguments.
-    gcloud compute ssh root@nagios --command "bash /generate-nagios-client.sh $HOSTNAME $IP"
+    gcloud compute ssh --zone us-east1-b nagios --command "sudo bash /generate-nagios-client.sh $HOSTNAME $IP"
   fi
   
 done
