@@ -27,6 +27,7 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
 
 ########## IF STATEMENTS ######################
 #These check to see if $NAME matches the case. If so, it launches the instance with required conditions.
+## Can be condensed greatly, since most of the conditions are more or less the same.
   
   if [ $NAME = 'nagios' ]; then
     gcloud compute instances create nagios	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/nagios.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
