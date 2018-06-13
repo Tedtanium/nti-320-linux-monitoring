@@ -31,6 +31,7 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
   if [ $HOSTNAME = 'nagios' ]; then
     gcloud compute instances create nagios	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/nagios.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
     sleep 2m
+  fi
   
   if [ $HOSTNAME = 'ldap' ]; then
     gcloud compute instances create ldap	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/ldap.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
@@ -72,7 +73,7 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
     gcloud compute instances create $HOSTNAME	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/$HOSTNAME.sh --image centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform    
   fi
   
-  if [$HOSTNAME != 'nagios' ]; then
+  if [ $HOSTNAME != 'nagios' ]; then
     IP=$(getent hosts $HOSTNAME.c.nti-320-200300.internal | awk '{ print $1 }')
     #Runs the Nagios client creation script on the Nagios server, passing hostname and IP variables as arguments.
     gcloud compute ssh root@nagios --command "bash /generate-nagios-client.sh $HOSTNAME $IP"
