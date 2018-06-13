@@ -7,6 +7,16 @@ pip install virtualenv
 pip install --upgrade pip
 pip install django psycopg2
 
+#Adds repo to known repositories.
+echo "[nti-320]
+name=Extra Packages for Centos from NTI-320 7 - $basearch
+#baseurl=http://download.fedoraproject.org/pub/epel/7/$basearch <- example epel repo
+# Note, this is putting repodata at packages instead of 7 and our path is a hack around that.
+baseurl=http://10.142.0.7/centos/7/extras/x86_64/Packages/
+enabled=1
+gpgcheck=0
+" >> /etc/yum.repos.d/NTI-320.repo   
+
 mkdir /opt/myproject
 virtualenv /opt/myproject/myprojectenv
 source /opt/myproject/myprojectenv/bin/activate
@@ -33,3 +43,5 @@ sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS =  \[\'"*"\'\]/g" /opt/myproject/my
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'pass')" | /opt/myproject/manage.py shell
 
 source /opt/myproject/myprojectenv/bin/activate && python /opt/myproject/manage.py makemigrations && python /opt/myproject/manage.py migrate && python /opt/myproject/manage.py runserver 0.0.0.0:8000
+
+
