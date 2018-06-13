@@ -52,3 +52,9 @@ baseurl=http://10.142.0.7/centos/7/extras/x86_64/Packages/
 enabled=1
 gpgcheck=0
 " >> /etc/yum.repos.d/NTI-320.repo   
+
+# Sleeps for a bit for the rest of the network to finish spinning up (and for clients to propogate).
+sleep 5m
+
+systemctl restart nagios
+systemctl restart httpd
