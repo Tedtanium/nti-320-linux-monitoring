@@ -30,7 +30,7 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
   
   if [ $NAME = 'nagios' ]; then
     gcloud compute instances create nagios	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/nagios.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
-    sleep 90s
+    sleep 170s
   fi
   
   if [ $NAME = 'ldap' ]; then
@@ -40,34 +40,34 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
   fi
   
   
-  if [ $HOST = 'nfs' ]; then
+  if [ $NAME = 'nfs' ]; then
     gcloud compute instances create nfs	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/nfs.sh --image centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
     NFSIP=$(getent hosts $NAME.c.nti-320-200300.internal | awk '{ print $1 }')
     sed -i "s/NFSIP/$NFSIP/g" /nti-320-linux-monitoring/automated-network/client.sh 
   fi
   
   
-  if [ $HOST = 'postgres' ]; then
+  if [ $NAME = 'postgres' ]; then
     gcloud compute instances create postgres	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/postgres.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
     POSTGRESIP=$(getent hosts $NAME.c.nti-320-200300.internal | awk '{ print $1 }')
     sed -i "s/POSTGRESIP/$POSTGRESIP/g" /nti-320-linux-monitoring/automated-network/django.sh 
   fi
   
   
-  if [ $HOST = 'django' ]; then
+  if [ $NAME = 'django' ]; then
     gcloud compute instances create django --metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/django.sh --image centos-7 --tags "http-server","djangoisonfiresomebodycall911" --zone us-east1-b --machine-type f1-micro --scopes cloud-platform 
   fi
   
   
-  if [ $HOST = 'load-balancer' ]; then 
+  if [ $NAME = 'load-balancer' ]; then 
     gcloud compute instances create load-balancer	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/load-balancer.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
   fi
   
-  if [ $HOST != 'cacti' ]; then
+  if [ $NAME = 'cacti' ]; then
     gcloud compute instances create cacti	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/cacti.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
   fi
   
-  if [ $HOST = 'client' ]; then
+  if [ $NAME = 'client' ]; then
     gcloud compute instances create client-a	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/client.sh --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
     gcloud compute instances create client-b	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/client.sh --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform
   fi
@@ -76,10 +76,10 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
     gcloud compute instances create $NAME	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/$NAME.sh --image centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform    
   fi
   
-  if [ $HOST != 'nagios' ]; then
+  if [ $NAME != 'nagios' ]; then
     IP=$(getent hosts $NAME.c.nti-320-200300.internal | awk '{ print $1 }')
     #Runs the Nagios client creation script on the Nagios server, passing hostname and IP variables as arguments.
-    su - tjense04 -c 'gcloud compute ssh --zone us-east1-b nagios --quiet --command "sudo bash /generate-nagios-client.sh $NAME $IP"'
+    su - tjense04 -c "gcloud compute ssh --zone us-east1-b nagios --quiet --command "\""sudo bash /generate-nagios-client.sh $NAME $IP"\"""
     fi
   
 done
