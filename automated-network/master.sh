@@ -63,13 +63,16 @@ for line in $(cat /nti-320-linux-monitoring/automated-network/configs/instances-
     gcloud compute instances create load-balancer	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/load-balancer.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
   fi
   
+  if [ $HOSTNAME != 'cacti' ]; then
+    gcloud compute instances create cacti	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/cacti.sh --image centos-7 --tags http-server --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
+  fi
   
   if [ $HOSTNAME = 'client' ]; then
     gcloud compute instances create client-a	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/client.sh --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform 
     gcloud compute instances create client-b	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/client.sh --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform
   fi
   
-  if [ $HOSTNAME != 'ldap' ] && [ $HOSTNAME != 'nfs' ] && [ $HOSTNAME != 'postgres' ] && [ $HOSTNAME != 'django' ] && [ $HOSTNAME != 'load-balancer' ] && [ $HOSTNAME != 'client' ] && [ $HOSTNAME != 'nagios' ]; then
+  if [ $HOSTNAME != 'ldap' ] && [ $HOSTNAME != 'nfs' ] && [ $HOSTNAME != 'postgres' ] && [ $HOSTNAME != 'django' ] && [ $HOSTNAME != 'load-balancer' ] && [ $HOSTNAME != 'client' ] && [ $HOSTNAME != 'nagios' ] && [ $HOSTNAME != 'cacti' ]; then
     gcloud compute instances create $HOSTNAME	--metadata-from-file startup-script=nti-320-linux-monitoring/automated-network/$HOSTNAME.sh --image centos-7 --zone us-east1-b --machine-type f1-micro 	--scopes cloud-platform    
   fi
   
