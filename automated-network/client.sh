@@ -5,6 +5,8 @@ if [ -e /etc/ldap.conf ]; then exit 0; fi
 export DEBIAN_FRONTEND=noninteractive
 apt-get --yes install libpam-ldap nscd
 
+apt-get update
+
 echo -e "ldap-auth-config        ldap-auth-config/rootbindpw     password
 ldap-auth-config        ldap-auth-config/bindpw password
 ldap-auth-config        ldap-auth-config/override       boolean true
