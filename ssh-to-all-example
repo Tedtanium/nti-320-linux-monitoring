@@ -12,6 +12,7 @@ gcloud compute instances list | grep RUNNING | awk '{print $1}' > /home/tjense04
 ####### Removes the server from its own list of servers. #########
 
 sed -i '/master/d' /home/tjense04/active-hosts
+sed -i '/nagios/d' /home/tjense04/active-hosts
 
 ############# FOR LOOP #########################################
 for line in $(cat active-hosts);
@@ -21,8 +22,7 @@ do
   INSTANCENAME=$line
 
 #SSHes in and echoes... A thing. 
-  gcloud compute ssh $INSTANCENAME --zone "us-east1-b" --command "echo 'Oh god it burns help it's eating my brain!' >> /home/tjense04/lastwords.txt"
-  gcloud compute ssh $INSTANCENAME --zone "us-east1-b" --command "echo 'And nobody heard of squid basketball ever again.' >> /home/tjense04/lastwords.txt"
+  gcloud compute ssh $INSTANCENAME --zone "us-east1-b" --command "sudo yum install nti-320-plugins -y"
   
 done
 ######## END OF FOR LOOP ####################################
