@@ -17,3 +17,5 @@ chown -R apache:apache /repos/
 systemctl restart httpd
 
 echo "*.info;mail.none;authpriv.none;cron.none   @10.142.0.8" >> /etc/rsyslog.conf && systemctl restart rsyslog.service
+
+setenforce 0
